@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>KEAM 2025 Rank Estimator</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 2rem;
+      background: #f5f5f5;
+      text-align: center;
+    }
+    .container {
+      background: white;
+      padding: 2rem;
+      border-radius: 12px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      max-width: 400px;
+      margin: auto;
+    }
+    input, button {
+      padding: 10px;
+      margin: 10px;
+      font-size: 16px;
+      width: 80%;
+    }
+    button {
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      cursor: pointer;
+    }
+    #result {
+      margin-top: 20px;
+      font-weight: bold;
+      font-size: 18px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>KEAM 2025 Rank Estimator</h2>
+    <p>Enter your percentile to estimate your rank</p>
+    <input type="number" id="percentile" placeholder="Percentile (e.g., 92.5)" step="0.01" />
+    <input type="number" id="total" placeholder="Total candidates (e.g., 79044)" value="79044" />
+    <button onclick="calculateRank()">Estimate Rank</button>
+    <div id="result"></div>
+  </div>
+
+  <script>
+    function calculateRank() {
+      const percentile = parseFloat(document.getElementById('percentile').value);
+      const total = parseInt(document.getElementById('total').value);
+
+      if (isNaN(percentile) || isNaN(total) || percentile < 0 || percentile > 100 || total <= 0) {
+        document.getElementById('result').innerText = 'Please enter valid inputs.';
+        return;
+      }
+
+      const rank = Math.round(((100 - percentile) / 100) * total);
+      document.getElementById('result').innerText = `Estimated Rank: ${rank.toLocaleString()}`;
+    }
+  </script>
+</body>
+</html>
